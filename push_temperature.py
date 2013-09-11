@@ -6,6 +6,7 @@ import os
 import re
 import requests
 import subprocess
+import sys
 import time
 import xively
 
@@ -69,8 +70,8 @@ def run():
 
     try:
       datastream.update()
-    except requests.HTTPError as e:
-      print "HTTPError({0}): {1}".format(e.errno, e.strerror)
+    except Exception as err:
+      sys.stderr.write('ERROR: %s\n' % str(err))
 
     print "Updated Xively feed, sleeping..."
     time.sleep(60)
